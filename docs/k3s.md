@@ -83,4 +83,4 @@ helm init --skip-refresh --upgrade --service-account tiller
 
 
 
-### [--> NEXT: Setting up Kubernetes locally](k3s.md)
+### [--> NEXT: Setting up a FaaS platform](openfaas.md)

@@ -1,0 +1,14 @@
+site_name: SOSC2019 
+theme:
+  name: material
+  logo:
+    icon: cloud_circle
+  palette:
+    primary: 'Deep Purple'
+    accent: 'Green'
+nav:
+- Home: 'README.md'
+- PaaS Orchestration: 'orchent.md' 
+- Container Orchestration: 'k3s.md'
+- Setting up FaaS platform: 'openfaas.md'
+repo_url: 'https://github.com/Cloud-PG/SOSC2019'
