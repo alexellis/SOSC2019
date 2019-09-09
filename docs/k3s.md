@@ -50,23 +50,6 @@ TODO: fai deploy di container testato con Davide
 TODO: esponi container testato con Davide
 
 
-## Before continuing: Install Helm
-
-```bash
-curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
-```
-
-```bash
-sudo kubectl -n kube-system create sa tiller \
-  && kubectl create clusterrolebinding tiller \
-  --clusterrole cluster-admin \
-  --serviceaccount=kube-system:tiller
-```
-
-```bash
-helm init --skip-refresh --upgrade --service-account tiller
-```
-
 
 ## Homeworks
 
@@ -82,5 +65,3 @@ helm init --skip-refresh --upgrade --service-account tiller
 - http://kubernetesbyexample.com/
 
 
-
-### [--> NEXT: Setting up a FaaS platform](openfaas.md)

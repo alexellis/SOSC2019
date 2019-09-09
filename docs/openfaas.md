@@ -20,9 +20,9 @@ There are also many open-source FaaS solutions (as you can see in the figure abo
 
 ## Getting things ready on Kubernetes
 
+
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/openfaas/faas-netes/master/namespaces.yml
-helm repo add openfaas https://openfaas.github.io/faas-netes/
 # generate a random password
 PASSWORD=$(head -c 12 /dev/urandom | shasum| cut -d' ' -f1)
 
@@ -31,7 +31,14 @@ kubectl -n openfaas create secret generic basic-auth \
 --from-literal=basic-auth-password="$PASSWORD"
 
 echo $PASSWORD > gateway-password.txt
+
+git clone https://github.com/openfaas/faas-netes
+cd faas-netes && \
+sudo kubectl apply -f ./yaml
+
 ```
+
+After few minutes you should be able to go to `http://127.0.0.1:31112` to start browsing the OpenFaas WebUI.
 
 ```bash
 curl -sL cli.openfaas.com | sudo sh
@@ -40,17 +47,13 @@ curl -sL cli.openfaas.com | sudo sh
 ```bash
 $ faas-cli help
 $ faas-cli version
+
+export OPENFAAS_URL=http://127.0.0.1:31112
+
+echo -n $PASSWORD | faas-cli login --password-stdin
 ```
 
-```bash
-helm repo update \
- && helm upgrade openfaas --install openfaas/openfaas \
-    --namespace openfaas  \
-    --set basic_auth=true \
-    --set functionNamespace=openfaas-fn
-```
-
-After few minutes you should be able to go to `http://127.0.0.1:31112` to start browsing the OpenFaas WebUI.
+## Deployment of a python function
 
 
 
@@ -67,5 +70,3 @@ After few minutes you should be able to go to `http://127.0.0.1:31112` to start 
 - https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/
 - http://kubernetesbyexample.com/
 
-
-### [--> NEXT: T.B.D](openfaas.md)

@@ -11,4 +11,5 @@ nav:
 - PaaS Orchestration: 'orchent.md' 
 - Container Orchestration: 'k3s.md'
 - Setting up FaaS platform: 'openfaas.md'
+- Trigger fuctions with events: 'events.md'
 repo_url: 'https://github.com/Cloud-PG/SOSC2019'

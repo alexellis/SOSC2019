@@ -376,4 +376,3 @@ ssh -i key.key <vm_ip> -l cloudadm
 
 - 
 
-### [--> NEXT: Setting up Kubernetes locally](k3s.md)
