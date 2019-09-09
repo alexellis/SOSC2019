@@ -1,0 +1,50 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+imports:
+  - indigo_custom_types:  https://raw.githubusercontent.com/DODAS-TS/SOSC-2018/master/templates/common/types.yml
+
+description: TOSCA template for a complete CMS Site over Mesos orchestrator
+
+topology_template:
+
+  inputs:
+
+    input test:
+      type: string 
+      default: "test"
+ 
+  node_templates:
+
+    create-server-vm:
+      type: tosca.nodes.indigo.Compute
+      capabilities:
+        endpoint:
+          properties:
+            network_name: PUBLIC
+            dns_name: apachepublic
+            ports:
+              apache_port:
+                protocol: tcp
+                source: 4880
+        scalable:
+          properties:
+            count: 1 
+        host:
+          properties:
+            num_cpus: 2
+            mem_size: "4 GB"
+        os:
+          properties:
+            image: "ost://cloud.recas.ba.infn.it/1113d7e8-fc5d-43b9-8d26-61906d89d479"
+            #image: "ubuntu-xenial-x86_64"
+
+    apache_install:
+      type: tosca.nodes.WebServer.Apache
+      requirements:
+        - host: create-server-vm
+
+  outputs:
+    vm_ip:
+      value: { concat: [ get_attribute: [ create-server-vm, public_address, 0 ] ] }
+    cluster_credentials:
+      value: { get_attribute: [ create-server-vm, endpoint, credential, 0 ] }

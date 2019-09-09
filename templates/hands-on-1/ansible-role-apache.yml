@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+  - name: Configure apache 1/2
+    get_url:
+      force: true
+      url: https://raw.githubusercontent.com/DODAS-TS/SOSC-2018/master/templates/hands-on-1/apache-config/port.conf
+      dest: /etc/apache2/ports.conf
+  
+  - name: Configure apache 2/2
+    get_url:
+      force: true
+      url: https://raw.githubusercontent.com/DODAS-TS/SOSC-2018/master/templates/hands-on-1/apache-config/000-default.conf
+      dest: /etc/apache2/sites-enabled/000-default.conf
+
+  - name: Start Apache service
+    service: name=apache2 state=restarted
+    when: ansible_os_family == "Debian"
+
+  - name: Start Apache service
+    service: name=httpd state=restarted
+    when: ansible_os_family == "RedHat"
