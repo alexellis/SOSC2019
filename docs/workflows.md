@@ -1,12 +1,14 @@
 ### [◀](README.md)
 
-# Workflows 101
+# Workflows 101 (a.k.a. functions calling functions)
 
 ## Building your first workflow (from [OpenFaaS workshop](https://github.com/openfaas/workshop/blob/master/lab4.md#kubernetes-1))
 
 
 
-## Triggers: using storage events
+# Triggers
+
+## Example: using storage events webhook
 
 If you are using Vagrant image you can start from here, otherwise at the end you'll find how to setup a S3 object storage on your own.
 
@@ -27,8 +29,6 @@ Now create two buckets called `incoming` and `processed`
 mc mb local/incoming
 mc mb local/processed
 ```
-
-### Minio WebUI 101
 
 You can log into the WebUI at `http://localhost:9000` with username `admin` and password `adminminio`.
 From there you can upload files and check the contents of the buckets.
