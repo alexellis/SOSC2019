@@ -18,6 +18,9 @@ sudo kubectl apply -f ./yaml
 
 curl -sL cli.openfaas.com | sudo sh
 
+echo "Waiting 5min for OpenFaaS to get ready..."
+sleep 120
+
 export OPENFAAS_URL=http://127.0.0.1:31112
 
-echo -n $PASSWORD | faas-cli login --password-stdin
+cat  /home/vagrant/gateway-password.txt | faas-cli login --password-stdin

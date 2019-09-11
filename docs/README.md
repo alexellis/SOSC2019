@@ -16,5 +16,7 @@ TODO
 - [PaaS Orchestration](orchent.md)
 - [Container Orchestration with Kubernetes](k3s.md)
 - [Setting up FaaS platform](openfaas.md)
-- [Trigger fuctions with events](events.md)
+- [Functions 101](events.md) <-- you can start from here just using Vagrant: `vagrant up`
+- [Workflows and triggers](workflows.md)
+
 
