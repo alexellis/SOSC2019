@@ -22,11 +22,11 @@ There are also many open-source FaaS solutions (as you can see in the figure abo
 
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/openfaas/faas-netes/master/namespaces.yml
+sudo kubectl apply -f https://raw.githubusercontent.com/openfaas/faas-netes/master/namespaces.yml
 # generate a random password
 PASSWORD=$(head -c 12 /dev/urandom | shasum| cut -d' ' -f1)
 
-kubectl -n openfaas create secret generic basic-auth \
+sudo kubectl -n openfaas create secret generic basic-auth \
 --from-literal=basic-auth-user=admin \
 --from-literal=basic-auth-password="$PASSWORD"
 
@@ -52,9 +52,6 @@ export OPENFAAS_URL=http://127.0.0.1:31112
 
 echo -n $PASSWORD | faas-cli login --password-stdin
 ```
-
-## Deployment of a python function
-
 
 
 ## Homeworks

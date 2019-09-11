@@ -38,18 +38,6 @@ To work with Kubernetes objects–whether to create, modify, or delete them–yo
 In this hands-on we will quickly walk through two main objects: Pods and Services.
 We will use, with some adaptations, [Kubernetes by example](http://kubernetesbyexample.com/) material, where you can find many other examples for different objects and use cases.
 
-## Pods
-
-"A pod is a collection of containers sharing a network and mount namespace and is the basic unit of deployment in Kubernetes. All containers in a pod are scheduled on the same node."
-
-TODO: fai deploy di container testato con Davide
-
-
-## Services
-
-TODO: esponi container testato con Davide
-
-
 
 ## Homeworks
 
