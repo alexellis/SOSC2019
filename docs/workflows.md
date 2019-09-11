@@ -4,7 +4,51 @@
 
 ## Building your first workflow (from [OpenFaaS workshop](https://github.com/openfaas/workshop/blob/master/lab4.md#kubernetes-1))
 
+Using the CLI:
 
+```
+$ faas-cli store deploy SentimentAnalysis
+```
+
+The Sentiment Analysis function will tell you the subjectivity and polarity (positivity rating) of any sentence. The result of the function is formatted in JSON as per the example below:
+
+```
+$ echo -n "California is great, it's always sunny there." | faas-cli invoke sentimentanalysis
+{"polarity": 0.8, "sentence_count": 1, "subjectivity": 0.75}
+```
+
+Now let's create a new simple function (like in the previous exercise) that will call `sentimentanalysis` just forwarding the request text.
+
+The `handler.py` code should look like:
+
+```python
+import os
+import requests
+import sys
+
+def handle(req):
+    """handle a request to the function
+    Args:
+        req (str): request body
+    """
+
+    gateway_hostname = os.getenv("gateway_hostname", "gateway") # uses a default of "gateway" for when "gateway_hostname" is not set
+
+    test_sentence = req
+
+    r = requests.get("http://" + gateway_hostname + ":8080/function/sentimentanalysis", data= test_sentence)
+
+    if r.status_code != 200:
+        sys.exit("Error with sentimentanalysis, expected: %d, got: %d\n" % (200, r.status_code))
+
+    result = r.json()
+    if result["polarity"] > 0.45:
+        return "That was probably positive"
+    else:
+        return "That was neutral or negative"
+```
+
+You can now try to invoke the new function, verifying that the request has been forwarded to `sentimentanalysis` by your custom function. We have just created a basic workflow.
 
 # Triggers
 
