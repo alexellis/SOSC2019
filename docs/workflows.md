@@ -1,8 +1,8 @@
 ### [◀](README.md)
 
-# Workflows 101 (a.k.a. functions calling functions)
+# Workflows - a.k.a. functions calling functions
 
-## Building your first workflow (from [OpenFaaS workshop](https://github.com/openfaas/workshop/blob/master/lab4.md#kubernetes-1))
+## Building your first workflow - from [OpenFaaS workshop](https://github.com/openfaas/workshop/blob/master/lab4.md#kubernetes-1)
 
 Using the CLI to deploy SentimentAnalysis function from the store:
 
@@ -69,12 +69,12 @@ faas-cli up -f invoker.yml
 You can now try to invoke the new function, verifying that the request has been forwarded to `sentimentanalysis` by your custom function. We have just created a basic workflow.
 
 ```bash
-$ echo -n "California is bad, it's always rainy there." | faas-cli invoke 
+$ echo -n "California is bad, it's always rainy there." | faas-cli invoke invoker
 That was neutral or negative
 ```
 
 ```bash
-$ echo -n "California is great, it's always sunny there." | faas-cli invoke 
+$ echo -n "California is great, it's always sunny there." | faas-cli invoke invoker
 That was probably positive
 ```
 
@@ -164,7 +164,6 @@ def handle(st):
 
     # Get the name of the file from the 'Key' field in the event message
     file_name = req['Key'].split('/')[-1]
-    print(source_bucket, dest_bucket, file_name)
 
     # Get the file from the storage
     mc.fget_object(source_bucket, file_name, "/tmp/" + file_name)
@@ -174,7 +173,6 @@ def handle(st):
     input_image = base64.b64encode(f.read())
 
     # Pass it to the facedetect function
-    print(gateway + "/function/facedetect")
     r = requests.post(gateway + "/function/facedetect", input_image)
     if r.status_code != 200:
         print("Error during call to facedetect, expected: %d, got: %d\n" % (200, r.status_code))
@@ -205,10 +203,10 @@ provider:
   gateway: http://127.0.0.1:31112
 functions:
   # function for loading the image from storage - the code just edited
-  processimage:
+  processimages:
     lang: python3
     handler: ./processimages
-    image: dciangot/processimages:latest
+    image: <your-docker-username-here>/processimages:latest
     environment:
       write_debug: true
       # environment variables used inside the funcion code
@@ -254,14 +252,10 @@ Now, once the functions will be ready you should try to upload a jpg image to th
 
 ```bash
 mkdir $HOME/minio_data
-docker run -d -v $HOME/minio_data:/data -p 9000:9000 -e "MINIO_ACCESS_KEY=admin" -e "MINIO_SECRET_KEY=admindciangot"  minio/minio server /data
+docker run -d -v $HOME/minio_data:/data --net host -e "MINIO_ACCESS_KEY=admin" -e "MINIO_SECRET_KEY=admindciangot"  minio/minio server /data
 ```
 
-prendi config da gist
-
-```bash
-./mc event add local/incoming arn:minio:sqs::1:webhook --event put --suffix .jpg
-```
+and the client
 
 ```bash
 wget https://dl.min.io/client/mc/release/linux-amd64/mc
