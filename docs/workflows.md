@@ -4,20 +4,26 @@
 
 ## Building your first workflow (from [OpenFaaS workshop](https://github.com/openfaas/workshop/blob/master/lab4.md#kubernetes-1))
 
-Using the CLI:
+Using the CLI to deploy SentimentAnalysis function from the store:
 
-```
-$ faas-cli store deploy SentimentAnalysis
+```bash
+mkdir $HOME/workflows
+cd $HOME/workflows
+faas-cli store deploy SentimentAnalysis
 ```
 
 The Sentiment Analysis function will tell you the subjectivity and polarity (positivity rating) of any sentence. The result of the function is formatted in JSON as per the example below:
 
-```
+```bash
 $ echo -n "California is great, it's always sunny there." | faas-cli invoke sentimentanalysis
 {"polarity": 0.8, "sentence_count": 1, "subjectivity": 0.75}
 ```
 
 Now let's create a new simple function (like in the previous exercise) that will call `sentimentanalysis` just forwarding the request text.
+
+```bash
+faas-cli new --lang python3 invoker --prefix="<your-docker-username-here>"
+```
 
 The `handler.py` code should look like:
 
@@ -36,7 +42,7 @@ def handle(req):
 
     test_sentence = req
 
-    r = requests.get("http://" + gateway_hostname + ":8080/function/sentimentanalysis", data= test_sentence)
+    r = requests.get("http://" + gateway_hostname + ":31112/function/sentimentanalysis", data= test_sentence)
 
     if r.status_code != 200:
         sys.exit("Error with sentimentanalysis, expected: %d, got: %d\n" % (200, r.status_code))
@@ -48,7 +54,29 @@ def handle(req):
         return "That was neutral or negative"
 ```
 
+Put `requests` in requirements.txt:
+
+```text
+requests
+```
+
+Then just deploy our function:
+
+```bash
+faas-cli up -f invoker.yml
+```
+
 You can now try to invoke the new function, verifying that the request has been forwarded to `sentimentanalysis` by your custom function. We have just created a basic workflow.
+
+```bash
+$ echo -n "California is bad, it's always rainy there." | faas-cli invoke 
+That was neutral or negative
+```
+
+```bash
+$ echo -n "California is great, it's always sunny there." | faas-cli invoke 
+That was probably positive
+```
 
 # Triggers
 
@@ -74,6 +102,9 @@ Now create two buckets called `incoming` and `processed`
 ```bash
 mc mb local/incoming
 mc mb local/processed
+
+# Set the trigger for any new jpg file appearing in local/incoming
+mc event add local/incoming arn:minio:sqs::1:webhook --event put --suffix .jpg
 ```
 
 You can log into the WebUI at `http://localhost:9000` with username `admin` and password `adminminio`.
@@ -84,9 +115,9 @@ From there you can upload files and check the contents of the buckets.
 
 First of all create a new function:
 
-```
-mkdir triggers
-cd triggers
+```bash
+mkdir $HOME/triggers
+cd $HOME/triggers
 
 faas-cli new --lang python3 processimages --prefix="<your-docker-username-here>"
 ```
@@ -115,10 +146,11 @@ def handle(st):
     """
 
     # Decode the json from the Minio event
+    print(st)
     req = json.loads(st)
 
     # Get configuration parameters from the docker environment (set in the processimage.yml)
-    gateway = os.environ['openfaas_gw']
+    gateway = gateway_hostname = os.getenv("openfaas_gw", "gateway.openfaas")
 
     # Configure the storage client
     mc = Minio(os.environ['minio_hostname'],
@@ -142,9 +174,11 @@ def handle(st):
     input_image = base64.b64encode(f.read())
 
     # Pass it to the facedetect function
+    print(gateway + "/function/facedetect")
     r = requests.post(gateway + "/function/facedetect", input_image)
     if r.status_code != 200:
-        sys.exit("Error during call to facedetect, expected: %d, got: %d\n" % (200, r.status_code))
+        print("Error during call to facedetect, expected: %d, got: %d\n" % (200, r.status_code))
+        return st
 
     # Finally get the output and save it locally
     dest_file_name = "processed" + file_name
@@ -158,6 +192,8 @@ def handle(st):
 
     # sync to Minio
     mc.fput_object(dest_bucket, dest_file_name, "/tmp/"+dest_file_name)
+
+    return st
 ```
 
 Now you need to configure the deployment of the functions:
@@ -166,20 +202,20 @@ Now you need to configure the deployment of the functions:
 version: 1.0
 provider:
   name: openfaas
-  gateway: http://gateway.openfaas:31112
+  gateway: http://127.0.0.1:31112
 functions:
   # function for loading the image from storage - the code just edited
   processimage:
     lang: python3
-    handler: ./processimage
-    image: dciangot/processimage:latest
+    handler: ./processimages
+    image: dciangot/processimages:latest
     environment:
       write_debug: true
       # environment variables used inside the funcion code
-      minio_hostname: "gateway.openfaas:9000"
-      minio_access_key: "dciangot"
-      minio_secret_key: "admindciangot"
-      openfaas_gw: "http://gateway.openfaas:31112"
+      minio_hostname: "10.42.0.1:9000"
+      minio_access_key: "admin"
+      minio_secret_key: "adminminio"
+      openfaas_gw: "http://gateway.openfaas:8080"
  
   # face detection function, pre-built. You can find the source here: 
   # https://github.com/alexellis/facedetect-openfaas

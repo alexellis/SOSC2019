@@ -22,7 +22,7 @@ sudo usermod -aG docker vagrant
 sudo apt-get install -y --allow-unauthenticated docker-ce docker-ce-cli containerd.io
 
 mkdir /home/vagrant/minio_data
-docker run -d -v /home/vagrant/minio_data:/data -p 9000:9000 -e "MINIO_ACCESS_KEY=admin" -e "MINIO_SECRET_KEY=adminminio"  minio/minio server /data
+docker run -d -v /home/vagrant/minio_data:/data --net host -e "MINIO_ACCESS_KEY=admin" -e "MINIO_SECRET_KEY=adminminio"  minio/minio server /data
 
 wget https://dl.min.io/client/mc/release/linux-amd64/mc
 mv mc /usr/bin/mc
@@ -34,5 +34,5 @@ mkdir /home/vagrant/.mc/
 cp config_mc.json /home/vagrant/.mc/config.json
 chown -R vagrant:vagrant  /home/vagrant/.mc/
 
-wget https://gist.githubusercontent.com/dciangot/b895329574cd308bed06684b745ce238/raw/eb6fc32954762c33ca585d24700b494743b7079d/config_minio.json
+wget  https://gist.githubusercontent.com/dciangot/b895329574cd308bed06684b745ce238/raw/295e2e5189e582249d7c5af27823585df5bbbc43/config_minio.json
 

@@ -18,7 +18,7 @@ sudo kubectl apply -f ./yaml
 
 curl -sL cli.openfaas.com | sudo sh
 
-echo "Waiting 5min for OpenFaaS to get ready..."
+echo "Waiting 2min for OpenFaaS to get ready..."
 sleep 120
 
 export OPENFAAS_URL=http://127.0.0.1:31112

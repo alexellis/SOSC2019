@@ -28,6 +28,12 @@ Deploy new function -> face-detect with OpenCV -> Deploy
 Now a new tab should appear with the function name selected. From there you can check the status and also try to invoke the function from the UI.
 For instance, as soon as the status of the function is ready, lets try to put a url with a jpg image in the request body field and then press invoke.
 
+The list of the function in store is also available from CLI with:
+
+```bash
+faas-cli store list
+```
+
 ## Deployment of a python function (from [OpenFaaS workshop](https://github.com/openfaas/workshop/blob/master/lab3.md#example-function-astronaut-finder))
 
 Hanno tutti un docker account?
@@ -94,19 +100,29 @@ faas-cli build -f ./astronaut-finder.yml
 Push the function:
 
 ```bash
+docker login
 faas-cli push -f ./astronaut-finder.yml
 ```
 
 Deploy the function:
 
 ```bash
+export OPENFAAS_URL=http://127.0.0.1:31112
+cat  /home/vagrant/gateway-password.txt | faas-cli login --password-stdin
 faas-cli deploy -f ./astronaut-finder.yml
 ```
 
-And now, just wait a bit for the function to be in `READY` state and then try to invoke it from command line:
+And now, just wait a bit for the function to be in `Ready` state 
 
 ```
-$ faas-cli invoke astronaut-finder
+$ faas-cli describe astronaut-finder | grep Status
+Status:              Ready
+```
+
+and then try to invoke it from command line:
+
+```
+$ echo | faas-cli invoke astronaut-finder
 Anton Shkaplerov is in space
 ```
 
