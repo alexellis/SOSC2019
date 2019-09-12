@@ -1,7 +1,7 @@
 ### [◀](README.md)
 
-# Workflows - a.k.a. functions calling functions
 
+# Workflows - a.k.a. functions calling functions
 ## Building your first workflow - from [OpenFaaS workshop](https://github.com/openfaas/workshop/blob/master/lab4.md#kubernetes-1)
 
 Using the CLI to deploy SentimentAnalysis function from the store:
@@ -78,9 +78,9 @@ $ echo -n "California is great, it's always sunny there." | faas-cli invoke invo
 That was probably positive
 ```
 
-# Triggers
 
-## Example: using storage events webhook
+## Triggers
+### Example: using storage events webhook
 
 If you are using Vagrant image you can start from here, otherwise at the end you'll find how to setup a S3 object storage on your own.
 
@@ -247,6 +247,7 @@ Now, once the functions will be ready you should try to upload a jpg image to th
 
 - Create a workflow with 2 functions in different languages
 - Try to create a workflow triggered by a storage event that use the Tensorflow serving function created on the previous set of homeworks
+
 
 ## EXTRA: Setting up an S3-compatible storage
 

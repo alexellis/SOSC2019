@@ -1,5 +1,6 @@
 ### [◀](README.md)
 
+
 # Introduction to cloud platforms
 
 When working with cloud resources, depending on the user needs, different layers of underlyng abstraction can be needed, and depending on how many layers and their composition one can define different categories.
@@ -7,6 +8,7 @@ When working with cloud resources, depending on the user needs, different layers
 [![PaaS](img/platform-spectrum-small.png)](https://dodas-ts.github.io/SOSC-2019/img/platform-spectrum-small.png)
 
 This part of the hands-on will focus on PaaS, for other "as a Service", take a look at this interesting post [here](https://mesosphere.com/blog/iaas-vs-caas-vs-paas-vs-faas/) from which, for this page, pictures and description credits are.
+
 
 ## Platform as a Service on top of Infrastracture as a Service
 
@@ -34,11 +36,13 @@ Key features:
 
 __In this hands-on a webserver will be deployed on cloud resources in an automated way thanks the use of a PaaS orchestrator and TOSCA system description files.__
 
+
 ## INDIGO-DC PaaS orchestrator
 
 [![tosca](img/sosc-indigo.png)](https://dodas-ts.github.io/SOSC-2019/img/sosc-indigo.png)
 
 [The INDIGO PaaS Orchestrator](https://github.com/indigo-dc/orchestrator) allows to instantiate resources on Cloud Management Frameworks (like OpenStack and OpenNebula) platforms based on deployment requests that are expressed through templates written in [TOSCA YAML Simple Profile v1.0](https://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.0/csprd01/TOSCA-Simple-Profile-YAML-v1.0-csprd01.html), and deploys them on the best cloud site available.
+
 
 ### Install orchent client
 
@@ -48,6 +52,7 @@ The requirement here is `golang` installation that can you find [here](https://g
 go get github.com/indigo-dc/orchent
 go install github.com/indigo-dc/orchent
 ```
+
 
 ### Retrieve IAM token
 
@@ -70,6 +75,7 @@ Copy and paste the export command to source the correct environement along with 
 export ORCHENT_URL=https://orchestrator.cloud.cnaf.infn.it/orchestrator
 ```
 
+
 ### Using TOSCA
 
 [![tosca](img/tosca.png)](https://dodas-ts.github.io/SOSC-2019/img/tosca.png)
@@ -77,6 +83,7 @@ export ORCHENT_URL=https://orchestrator.cloud.cnaf.infn.it/orchestrator
 The TOSCA metamodel uses the concept of __service templates to describe cloud workloads as a topology template__, which is a graph of node templates modeling the components a workload is made up of and as relationship templates modeling the relations between those components. TOSCA further provides a type __system of node types to describe the possible building blocks for constructing a service template__, as well as relationship type to describe possible kinds of relations. Both node and relationship types may define lifecycle operations to implement the behavior an orchestration engine can invoke when instantiating a service template. For example, a node type for some software product might provide a ‘create’ operation to handle the creation of an instance of a component at runtime, or a ‘start’ or ‘stop’ operation to handle a start or stop event triggered by an orchestration engine. Those lifecycle operations are backed by implementation artifacts such as scripts or Chef recipes that implement the actual behavior.
 
 The TOSCA simple profile assumes a number of base types (node types and relationship types) to be supported by each compliant environment such as a ‘Compute’ node type, a ‘Network’ node type or a generic ‘Database’ node type. Furthermore, it is envisioned that a large number of __additional types for use in service templates will be defined by a community over time__. Therefore, template authors in many cases will not have to define types themselves but can __simply start writing service templates that use existing types__. In addition, the simple profile will provide means for easily customizing and extending existing types, for example by providing a customized ‘create’ script for some software.
+
 
 ### Deploy webserver on the cloud: TOSCA types
 
@@ -250,6 +257,7 @@ node_types:
             zabbix_server_metadata: { get_property: [ SELF, zabbix_server_metadata ] }
 ```
 
+
 ### Deploy command with deployment template
 
 The deployment template makes use of the TOSCA types defined above to create and orchestrate the deployment on the cloud resources.
@@ -328,6 +336,7 @@ Deployment [28dc62e6-facc-4f70-bc14-4a32e1149c94]:
   callback:
 ```
 
+
 ### Monitor the deployment process
 
 ``` bash
@@ -364,6 +373,7 @@ Deployment [28dc62e6-facc-4f70-bc14-4a32e1149c94]:
     template [https://orchestrator.cloud.cnaf.infn.it/orchestrator/deployments/28dc62e6-facc-4f70-bc14-4a32e1149c94/template]
 ```
 
+
 ### Login into the deployed machine
 
 ``` bash
@@ -372,7 +382,8 @@ chmod 600 key.key
 ssh -i key.key <vm_ip> -l cloudadm
 ```
 
+
 ## HOMEWORKS
 
-- 
+- TBD
 

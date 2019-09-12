@@ -1,5 +1,6 @@
 ### [◀](README.md)
 
+
 # Working with functions
 
 You can get a local environment ready using Vagrant for an automatic setup Virtualbox machine:
@@ -14,6 +15,7 @@ vagrant ssh
 ```
 
 N.B. Vangrant and Virtualbox are required on the machine of course.
+
 
 ## Using example functions and WebUI
 
@@ -34,6 +36,7 @@ The list of the function in store is also available from CLI with:
 faas-cli store list
 ```
 
+
 ## Deployment of a python function (from [OpenFaaS workshop](https://github.com/openfaas/workshop/blob/master/lab3.md#example-function-astronaut-finder))
 
 Hanno tutti un docker account?
@@ -44,6 +47,7 @@ cd astronaut-finder
 
 faas-cli new --lang python3 astronaut-finder --prefix="<your-docker-username-here>"
 ```
+
 
 ### Function fundamentals
 
@@ -63,6 +67,7 @@ Edit `./astronaut-finder/requirements.txt`:
 ```
 requests
 ```
+
 
 ### Write the function's code
 
@@ -88,6 +93,7 @@ def handle(req):
 
     return "%s is in space" % (name)
 ```
+
 
 ### Deploy a function
 
@@ -132,6 +138,7 @@ or from the http endpoint:
 $ curl http://localhost:31112/function/astronaut-finder
 Joe Acaba is in space
 ```
+
 
 ## HOMEWORK
 
