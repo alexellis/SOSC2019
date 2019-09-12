@@ -1,6 +1,4 @@
-# Hands on session
-
-TODO
+# FaaS hands on session
 
 ## Contacts
 
