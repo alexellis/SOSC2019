@@ -4,13 +4,16 @@ theme:
   logo:
     icon: cloud_circle
   palette:
-    primary: 'Deep Purple'
-    accent: 'Green'
+    primary: 'Blue'
+    accent: 'Red'
 nav:
 - Home: 'README.md'
 - PaaS Orchestration: 'orchent.md' 
-- Container Orchestration: 'k3s.md'
-- Setting up FaaS platform: 'openfaas.md'
 - Functions 101: 'events.md'
 - Workflows and triggers: 'workflows.md'
+- Extras:
+  - Setup a Container Orchestration: 'k3s.md'
+  - Setup FaaS platform: 'openfaas.md'
 repo_url: 'https://github.com/Cloud-PG/SOSC2019'
+markdown_extensions: [codehilite]
+

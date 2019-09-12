@@ -2,9 +2,18 @@
 
 # Working with functions
 
-DESCRIZIONE DI COSA FARO'
+You can get a local environment ready using Vagrant for an automatic setup Virtualbox machine:
 
-puoi partire da qui installando vagrant+virtualbox
+```bash
+git clone https://github.com/Cloud-PG/SOSC2019.git
+cd SOSC2019
+# This may take few minutes
+vagrant up
+# Log into the created machine
+vagrant ssh
+```
+
+N.B. Vangrant and Virtualbox are required on the machine of course.
 
 ## Using example functions and WebUI
 
@@ -109,3 +118,6 @@ Joe Acaba is in space
 ```
 
 ## HOMEWORK
+
+- Try to create a function for serving your ML model (you can also make use of: https://github.com/alexellis/tensorflow-serving-openfaas )
+- Create a function in a different language if you know any

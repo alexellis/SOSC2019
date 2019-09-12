@@ -1,5 +1,7 @@
 # Hands on session
 
+TODO
+
 ## Contacts
 
 Diego Ciangottini (diego.ciangottini\<at\>pg.infn.it)
@@ -7,16 +9,13 @@ Diego Ciangottini (diego.ciangottini\<at\>pg.infn.it)
 Mirco Tracolli (mirco.tracolli\<at\>pg.infn.it)
 
 
-## Objective
-
-TODO
-
 ## Hands-on guide
 
 - [PaaS Orchestration](orchent.md)
-- [Container Orchestration with Kubernetes](k3s.md)
-- [Setting up FaaS platform](openfaas.md)
-- [Functions 101](events.md) <-- you can start from here just using Vagrant: `vagrant up`
+- [Functions 101](events.md)
 - [Workflows and triggers](workflows.md)
 
+## EXTRAS: machine setup and architecture
 
+- [Container Orchestration with Kubernetes](k3s.md)
+- [Setting up FaaS platform](openfaas.md)

@@ -82,11 +82,125 @@ From there you can upload files and check the contents of the buckets.
 
 ### Trigger a facedetect function on loaded images
 
-SPIEGA CONTENUTO DEI FILE
+First of all create a new function:
+
+```
+mkdir triggers
+cd triggers
+
+faas-cli new --lang python3 processimages --prefix="<your-docker-username-here>"
+```
+
+Then we need to modify the handler to:
+- get the file name from the storage event
+- get the file from the storage
+- encode it in base64 (required as input by the face detection function)
+- call the face detection function
+- get the output and save it back to the storage in a separate bucket
+
+The result is in this form:
+
+```python
+import json
+from minio import Minio
+import requests
+import os
+import base64
+
+def handle(st):
+    
+    """handle a request to the function
+    Args:
+        st (str): request body
+    """
+
+    # Decode the json from the Minio event
+    req = json.loads(st)
+
+    # Get configuration parameters from the docker environment (set in the processimage.yml)
+    gateway = os.environ['openfaas_gw']
+
+    # Configure the storage client
+    mc = Minio(os.environ['minio_hostname'],
+                  access_key=os.environ['minio_access_key'],
+                  secret_key=os.environ['minio_secret_key'],
+                  secure=False)
+
+    # Set the name for the source and destination buckets 
+    source_bucket = "incoming"
+    dest_bucket = "processed"
+
+    # Get the name of the file from the 'Key' field in the event message
+    file_name = req['Key'].split('/')[-1]
+    print(source_bucket, dest_bucket, file_name)
+
+    # Get the file from the storage
+    mc.fget_object(source_bucket, file_name, "/tmp/" + file_name)
+
+    # Encode the image into base64
+    f = open("/tmp/" + file_name, "rb")
+    input_image = base64.b64encode(f.read())
+
+    # Pass it to the facedetect function
+    r = requests.post(gateway + "/function/facedetect", input_image)
+    if r.status_code != 200:
+        sys.exit("Error during call to facedetect, expected: %d, got: %d\n" % (200, r.status_code))
+
+    # Finally get the output and save it locally
+    dest_file_name = "processed" + file_name
+    f = open("/tmp/" + dest_file_name, "wb")
+    f.write(r.content)
+    f.close()
+
+    f = open("/tmp/input_" + file_name, "wb")
+    f.write(input_image)
+    f.close()
+
+    # sync to Minio
+    mc.fput_object(dest_bucket, dest_file_name, "/tmp/"+dest_file_name)
+```
+
+Now you need to configure the deployment of the functions:
+
+```yaml
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://gateway.openfaas:31112
+functions:
+  # function for loading the image from storage - the code just edited
+  processimage:
+    lang: python3
+    handler: ./processimage
+    image: dciangot/processimage:latest
+    environment:
+      write_debug: true
+      # environment variables used inside the funcion code
+      minio_hostname: "gateway.openfaas:9000"
+      minio_access_key: "dciangot"
+      minio_secret_key: "admindciangot"
+      openfaas_gw: "http://gateway.openfaas:31112"
+ 
+  # face detection function, pre-built. You can find the source here: 
+  # https://github.com/alexellis/facedetect-openfaas
+  facedetect:
+    skip_build: true
+    image: alexellis2/facedetect:0.1
+    environment:
+      output_mode: "image"
+      write_debug: true
+```
+
+Before pushing the function in, don't forget to set the requirements.txt:
+
+```text
+minio
+requests
+```
+
+Then just build and deploy our two functions with:
 
 ```bash
-git clone https://github.com/Cloud-PG/miniofaas.git
-cd miniofaas
 faas-cli build -f processimages.yml
 faas-cli push -f processimages.yml
 faas-cli deploy -f processimages.yml
@@ -95,9 +209,10 @@ faas-cli deploy -f processimages.yml
 Now, once the functions will be ready you should try to upload a jpg image to the `incoming` bucket and soon you should be able to find a processed file in the `processed` bucket that you can download from the webUI and visualize.
 
 
-## HOMEWORK
+## HOMEWORKS
 
-
+- Create a workflow with 2 functions in different languages
+- Try to create a workflow triggered by a storage event that use the Tensorflow serving function created on the previous set of homeworks
 
 ## EXTRA: Setting up an S3-compatible storage
 
