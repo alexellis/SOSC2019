@@ -3,9 +3,9 @@
 
 ## Contacts
 
-Diego Ciangottini (diego.ciangottini\<at\>pg.infn.it)
+Diego Ciangottini (diego.ciangottini<at\>pg.infn.it)
 
-Mirco Tracolli (mirco.tracolli\<at\>pg.infn.it)
+Mirco Tracolli (mirco.tracolli<at\>pg.infn.it)
 
 
 ## Hands-on guide
