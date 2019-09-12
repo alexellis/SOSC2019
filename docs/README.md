@@ -1,4 +1,5 @@
 # FaaS hands on session
+![travis build](https://travis-ci.org/Cloud-PG/SOSC2019.svg?branch=master)
 
 ## Contacts
 
