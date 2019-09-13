@@ -7,6 +7,9 @@ Diego Ciangottini (diego.ciangottini<at\>pg.infn.it)
 
 Mirco Tracolli (mirco.tracolli<at\>pg.infn.it)
 
+## Original matieral
+
+Part of the FaaS introductory material is provided by [OpenFaaS workshop](https://github.com/openfaas/workshop)
 
 ## Hands-on guide
 

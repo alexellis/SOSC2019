@@ -25,6 +25,8 @@ sudo kubectl get nodes
 
 ## Kubernetes fundamentals
 
+![schema k8s cluster](https://miro.medium.com/max/841/1*J4BypEYTe_qpOymFFexvGg.png)
+
 [From Kubernetes docs](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/) - "Kubernetes Objects are persistent entities in the Kubernetes system. Kubernetes uses these entities to represent the state of your cluster. Specifically, they can describe:
 
 - What containerized applications are running (and on which nodes)

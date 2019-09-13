@@ -3,7 +3,7 @@
 
 # Working with functions
 
-You can get a local environment ready using Vagrant for an automatic setup Virtualbox machine:
+You can get a local environment ready using Vagrant for an automatically setting up a machine on Virtualbox:
 
 ```bash
 git clone https://github.com/Cloud-PG/SOSC2019.git
