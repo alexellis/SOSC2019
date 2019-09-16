@@ -1,21 +1,20 @@
-
-VM1: ssh -lubuntu 90.147.170.108 
-VM2: ssh -lubuntu 90.147.170.123 
-VM3: ssh -lubuntu 90.147.102.165 
-VM4: ssh -lubuntu 90.147.170.131 
-VM5: ssh -lubuntu 90.147.102.125 
-VM6: ssh -lubuntu 90.147.102.150 
-VM7: ssh -lubuntu 90.147.75.99   
-VM8: ssh -lubuntu 90.147.170.115 
-VM9: ssh -lubuntu 90.147.102.126 
-VM10: ssh -lubuntu 90.147.102.136 
-VM11: ssh -lubuntu 90.147.102.221 
-VM12: ssh -lubuntu 90.147.102.127 
-VM13: ssh -lubuntu 90.147.102.162 
-VM14: ssh -lubuntu 90.147.102.122 
-VM15: ssh -lubuntu 90.147.102.13  
-VM16: ssh -lubuntu 90.147.170.136 
-VM17: ssh -lubuntu 90.147.170.149 
-VM18: ssh -lubuntu 90.147.102.22  
-VM19: ssh -lubuntu 90.147.170.153 
-VM20: ssh -lubuntu 90.147.170.148
+VM1: ssh -lubuntu 90.147.170.108 -L 31112:localhost:31112 -L 9000:localhost:9000
+VM2: ssh -lubuntu 90.147.170.123 -L 31112:localhost:31112 -L 9000:localhost:9000
+VM3: ssh -lubuntu 90.147.102.165 -L 31112:localhost:31112 -L 9000:localhost:9000
+VM4: ssh -lubuntu 90.147.170.131 -L 31112:localhost:31112 -L 9000:localhost:9000
+VM5: ssh -lubuntu 90.147.102.125 -L 31112:localhost:31112 -L 9000:localhost:9000
+VM6: ssh -lubuntu 90.147.102.150 -L 31112:localhost:31112 -L 9000:localhost:9000
+VM7: ssh -lubuntu 90.147.75.99 -L 31112:localhost:31112 -L 9000:localhost:9000
+VM8: ssh -lubuntu 90.147.170.115 -L 31112:localhost:31112 -L 9000:localhost:9000
+VM9: ssh -lubuntu 90.147.102.126 -L 31112:localhost:31112 -L 9000:localhost:9000
+VM10: ssh -lubuntu 90.147.102.136 -L 31112:localhost:31112 -L 9000:localhost:9000
+VM11: ssh -lubuntu 90.147.102.221 -L 31112:localhost:31112 -L 9000:localhost:9000
+VM12: ssh -lubuntu 90.147.102.127 -L 31112:localhost:31112 -L 9000:localhost:9000
+VM13: ssh -lubuntu 90.147.102.162 -L 31112:localhost:31112 -L 9000:localhost:9000
+VM14: ssh -lubuntu 90.147.102.122 -L 31112:localhost:31112 -L 9000:localhost:9000
+VM15: ssh -lubuntu 90.147.102.13 -L 31112:localhost:31112 -L 9000:localhost:9000
+VM16: ssh -lubuntu 90.147.170.136 -L 31112:localhost:31112 -L 9000:localhost:9000
+VM17: ssh -lubuntu 90.147.170.149 -L 31112:localhost:31112 -L 9000:localhost:9000
+VM18: ssh -lubuntu 90.147.102.22 -L 31112:localhost:31112 -L 9000:localhost:9000
+VM19: ssh -lubuntu 90.147.170.153 -L 31112:localhost:31112 -L 9000:localhost:9000
+VM20: ssh -lubuntu 90.147.170.148 -L 31112:localhost:31112 -L 9000:localhost:9000

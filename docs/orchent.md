@@ -49,6 +49,9 @@ __In this hands-on a webserver will be deployed on cloud resources in an automat
 The requirement here is `golang` installation that can you find [here](https://golang.org/doc/install)
 
 ```bash
+wget https://dl.google.com/go/go1.13.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.13.linux-amd64.tar.gz
+export PATH=$PATH:/usr/local/go/bin:/home/ubuntu/go/bin
 go get github.com/indigo-dc/orchent
 go install github.com/indigo-dc/orchent
 ```
