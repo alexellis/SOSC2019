@@ -6,12 +6,23 @@
 You can get a local environment ready using Vagrant for an automatically setting up a machine on Virtualbox:
 
 ```bash
+# Download and extract vagrant binary if you do not have one already
+wget https://releases.hashicorp.com/vagrant/2.2.5/vagrant_2.2.5_linux_amd64.zip
+unzip vagrant_2.2.5_linux_amd64.zip
+# For Mac you can use this
+# https://releases.hashicorp.com/vagrant/2.2.5/vagrant_2.2.5_x86_64.dmg
+#
+# For Windows you can use this
+# https://releases.hashicorp.com/vagrant/2.2.5/vagrant_2.2.5_x86_64.msi
+#
+# You can visit https://www.vagrantup.com/downloads.html for a complete list
+
 git clone https://github.com/Cloud-PG/SOSC2019.git
 cd SOSC2019
 # This may take few minutes
-vagrant up
+./vagrant up
 # Log into the created machine
-vagrant ssh
+./vagrant ssh
 ```
 
 N.B. Vangrant and Virtualbox are required on the machine of course.
