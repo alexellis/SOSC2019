@@ -16,7 +16,7 @@ vagrant ssh
 
 N.B. Vangrant and Virtualbox are required on the machine of course.
 
-Some additional machine have been prepared for the school participants. You can find hot to access to your machine [here](https://github.com/Cloud-PG/SOSC2019/ansible/hosts)
+Some additional machine have been prepared for the school participants. You can find hot to access to your machine [here](https://raw.githubusercontent.com/Cloud-PG/SOSC2019/master/ansible/hosts)
 
 ## Using example functions and WebUI
 
