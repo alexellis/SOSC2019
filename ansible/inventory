@@ -1,0 +1,21 @@
+[servers]
+vm1   ansible_host=90.147.75.148     ansible_connection=ssh        ansible_user=ubuntu ansible_ssh_private_key_file=/home/dciangot/.ssh/sosc-key
+vm2   ansible_host=90.147.75.149   ansible_connection=ssh        ansible_user=ubuntu ansible_ssh_private_key_file=/home/dciangot/.ssh/sosc-key
+vm3   ansible_host=90.147.75.198    ansible_connection=ssh        ansible_user=ubuntu ansible_ssh_private_key_file=/home/dciangot/.ssh/sosc-key
+vm4   ansible_host=90.147.75.159   ansible_connection=ssh        ansible_user=ubuntu ansible_ssh_private_key_file=/home/dciangot/.ssh/sosc-key
+vm5   ansible_host=90.147.75.199    ansible_connection=ssh        ansible_user=ubuntu ansible_ssh_private_key_file=/home/dciangot/.ssh/sosc-key
+vm6   ansible_host=90.147.75.176     ansible_connection=ssh        ansible_user=ubuntu ansible_ssh_private_key_file=/home/dciangot/.ssh/sosc-key
+vm7   ansible_host=90.147.75.134     ansible_connection=ssh        ansible_user=ubuntu ansible_ssh_private_key_file=/home/dciangot/.ssh/sosc-key
+vm8   ansible_host=90.147.75.197    ansible_connection=ssh        ansible_user=ubuntu ansible_ssh_private_key_file=/home/dciangot/.ssh/sosc-key
+vm9   ansible_host=90.147.75.162     ansible_connection=ssh        ansible_user=ubuntu ansible_ssh_private_key_file=/home/dciangot/.ssh/sosc-key
+vm10  ansible_host=90.147.102.98     ansible_connection=ssh        ansible_user=ubuntu ansible_ssh_private_key_file=/home/dciangot/.ssh/sosc-key
+vm11  ansible_host=90.147.75.171    ansible_connection=ssh        ansible_user=ubuntu ansible_ssh_private_key_file=/home/dciangot/.ssh/sosc-key
+vm12  ansible_host=90.147.75.203   ansible_connection=ssh        ansible_user=ubuntu ansible_ssh_private_key_file=/home/dciangot/.ssh/sosc-key
+vm13  ansible_host=90.147.102.96   ansible_connection=ssh        ansible_user=ubuntu ansible_ssh_private_key_file=/home/dciangot/.ssh/sosc-key
+vm14  ansible_host=90.147.75.170     ansible_connection=ssh        ansible_user=ubuntu ansible_ssh_private_key_file=/home/dciangot/.ssh/sosc-key
+vm15  ansible_host=90.147.75.208   ansible_connection=ssh        ansible_user=ubuntu ansible_ssh_private_key_file=/home/dciangot/.ssh/sosc-key
+vm16  ansible_host=90.147.102.99   ansible_connection=ssh        ansible_user=ubuntu ansible_ssh_private_key_file=/home/dciangot/.ssh/sosc-key
+vm17  ansible_host=90.147.75.167   ansible_connection=ssh        ansible_user=ubuntu ansible_ssh_private_key_file=/home/dciangot/.ssh/sosc-key
+vm18  ansible_host=90.147.75.200   ansible_connection=ssh        ansible_user=ubuntu ansible_ssh_private_key_file=/home/dciangot/.ssh/sosc-key
+vm19  ansible_host=90.147.75.121    ansible_connection=ssh        ansible_user=ubuntu ansible_ssh_private_key_file=/home/dciangot/.ssh/sosc-key
+vm20  ansible_host=90.147.75.140    ansible_connection=ssh        ansible_user=ubuntu ansible_ssh_private_key_file=/home/dciangot/.ssh/sosc-key

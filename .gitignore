@@ -2,3 +2,5 @@ site
 .vagrant
 *.log
 vagrant*
+key*
+*user.yaml

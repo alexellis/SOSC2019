@@ -20,6 +20,7 @@ Vagrant.configure(2) do |config|
   # See https://github.com/hashicorp/vagrant/issues/5005
   config.ssh.insert_key = false
 
+  config.vm.provision "shell", path: "scripts/install_docker.sh"
   config.vm.provision "shell", path: "scripts/install_local_openfaas.sh"
   config.vm.provision "shell", path: "scripts/install_minio_with_hook.sh"
 

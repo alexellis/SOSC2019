@@ -1,6 +1,12 @@
 #!/bin/bash
 
+sudo sed -i 's/127.0.0.1 localhost/127.0.0.1 localhost '"$HOSTNAME"'/' /etc/hosts 
+
 curl -sfL https://get.k3s.io | sh -
+
+# If you want to use docker instead of containerd
+# curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--docker" sh -
+
 
 sudo kubectl apply -f https://raw.githubusercontent.com/openfaas/faas-netes/master/namespaces.yml
 
@@ -17,10 +23,3 @@ cd faas-netes && \
 sudo kubectl apply -f ./yaml
 
 curl -sL cli.openfaas.com | sudo sh
-
-echo "Waiting 2min for OpenFaaS to get ready..."
-sleep 120
-
-export OPENFAAS_URL=http://127.0.0.1:31112
-
-cat  /home/vagrant/gateway-password.txt | faas-cli login --password-stdin

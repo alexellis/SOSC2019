@@ -29,8 +29,12 @@ Deploy new function -> face-detect with OpenCV -> Deploy
 
 Now a new tab should appear with the function name selected. From there you can check the status and also try to invoke the function from the UI.
 For instance, as soon as the status of the function is ready, lets try to put a url with a jpg image in the request body field and then press invoke.
+Let's try the two below for example:
+- [https://parismatch.be/app/uploads/2018/04/Macaca_nigra_self-portrait_large-e1524567086123-1100x715.jpg](https://parismatch.be/app/uploads/2018/04/Macaca_nigra_self-portrait_large-e1524567086123-1100x715.jpg)
+- [http://thedreamwithinpictures.com/wp-content/uploads/2013/05/c3a89__montage_2048-copy.jpg](http://thedreamwithinpictures.com/wp-content/uploads/2013/05/c3a89__montage_2048-copy.jpg)
 
-The list of the function in store is also available from CLI with:
+
+The list of other functions available in the store is also available from CLI with:
 
 ```bash
 faas-cli store list
@@ -114,7 +118,7 @@ Deploy the function:
 
 ```bash
 export OPENFAAS_URL=http://127.0.0.1:31112
-cat  /home/vagrant/gateway-password.txt | faas-cli login --password-stdin
+cat  $HOME/gateway-password.txt | faas-cli login --password-stdin
 faas-cli deploy -f ./astronaut-finder.yml
 ```
 
