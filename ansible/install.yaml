@@ -2,10 +2,10 @@
 # The tasks below are not safe as they should be - no apt modules used for instance
 # Please keep this in mind while you use it
 
-#- hosts: servers
-- hosts:
-  - vm1
-  - vm2
+- hosts: servers
+  #- hosts:
+  #- vm1
+  #- vm2
   vars:
     vnode_prefix: vnode-
   strategy: free

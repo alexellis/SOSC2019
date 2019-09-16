@@ -240,7 +240,7 @@ faas-cli push -f processimages.yml
 faas-cli deploy -f processimages.yml
 ```
 
-Now, once the functions will be ready you should try to upload a jpg image to the `incoming` bucket and soon you should be able to find a processed file in the `processed` bucket that you can download from the webUI and visualize.
+Now, once the functions will be ready you should try to upload a jpg image to the `incoming` bucket using the WebUI ( login at `<your host>:9000` with user `admin` and passwd `adminminio` ) and soon you should be able to find a processed file in the `processed` bucket that you can download from the webUI and visualize.
 
 
 ## HOMEWORKS

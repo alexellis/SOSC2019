@@ -296,7 +296,7 @@ topology_template:
             count: 1 
         host:
           properties:
-            num_cpus: 2
+            num_cpus: 1
             mem_size: "2 GB"
         os:
           properties:
