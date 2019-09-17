@@ -44,25 +44,14 @@ __N.B. In this hands-on a simple VM will be deployed, as an example, on cloud re
 ### Requirement
 
 - First of you need to register to the service as described [here](https://dodas-iam.cloud.cnaf.infn.it). *N.B.* please put in the registration note "SOSC2019 student". Requests without this note will not be accepted. Please also notice that the resources instantiated for the school will be removed from the test pool few days after the end of the school.
-- `golang` installation is also needed [here](https://golang.org/doc/install)
-```bash
-# For the school machine, just do:
-wget https://dl.google.com/go/go1.13.linux-amd64.tar.gz
-sudo tar -C /usr/local -xzf go1.13.linux-amd64.tar.gz
-export PATH=$PATH:/usr/local/go/bin:/home/ubuntu/go/bin
-```
 
-### Install orchent client
-
-The requirement here is `golang` installation that can you find [here](https://golang.org/doc/install)
+### Install deployment client
 
 ```bash
-go get github.com/indigo-dc/orchent
-go install github.com/indigo-dc/orchent
+sudo apt install -y jq unzip
 wget https://github.com/Cloud-PG/dodas-go-client/releases/download/v0.2.2/dodas.zip
 unzip dodas.zip
 sudo mv dodas /usr/local/bin/
-sudo apt install -y jq unzip
 ```
 
 
@@ -315,10 +304,6 @@ Then start the deployment on provided cloud resources with:
 
 ```bash
 dodas create --config auth_file.yaml templates/hands-on-1/Handson-Part1.yaml
-```
-
-``` bash
-orchent depcreate  templates/hands-on-1/Handson-Part1.yaml '{}'
 ```
 
 the expected output is something like:
