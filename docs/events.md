@@ -83,7 +83,7 @@ Some additional machines have been prepared for the school participants. You can
 
 ## Using example functions and WebUI
 
-Now you can go to `http://localhost:31112/ui/` and, using the password in gateway_password.txt with user `admin`, you should be able to log in. To see your password just type:
+Now you can go to <a href="http://localhost:31112/ui/" target="_blank">http://localhost:31112/ui/</a> and, using the password in gateway_password.txt with user `admin`, you should be able to log in. To see your password just type:
 
 ```bash
 cat gateway-password.txt
@@ -96,6 +96,9 @@ You will have a page like that as result after the login:
 Let's start playing with some example functions. For instance, you can instantiate a function the face-detection of an online image just clicking on `Deploy new function`, searching for `opencv` and installing `face-detect with OpenCV` (button `Deploy`).
 
 ![New function](img/openfaasstartup_new_function.png)
+
+---
+
 ![Face detect function](img/openfaasstartup_install_dace_detect.png)
 
 Now a new tab should appear with the function name selected. 
@@ -115,6 +118,9 @@ http://thedreamwithinpictures.com/wp-content/uploads/2013/05/c3a89__montage_2048
 For the second one you will have the following result:
 
 ![New function](img/openfaasstartup_example.png)
+
+---
+
 ![New function](img/openfaasstartup_example_result.jpg)
 
 The list of all available functions in the store is also available from CLI using the following command from the vagrant machine already created:
@@ -205,7 +211,7 @@ import random
 def handle(req):
     r = requests.get("http://api.open-notify.org/astros.json")
     result = r.json()
-    index = random.randint(0, len(result["people"])-1)
+    index = random.randint(0, result["number"]-1)
     name = result["people"][index]["name"]
 
     return "%s is in space" % (name)
