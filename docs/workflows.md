@@ -1,6 +1,5 @@
 ### [◀](README.md)
 
-
 # Workflows - a.k.a. functions calling functions
 ## Building your first workflow - from [OpenFaaS workshop](https://github.com/openfaas/workshop/blob/master/lab4.md#kubernetes-1)
 
@@ -9,14 +8,23 @@ Using the CLI to deploy SentimentAnalysis function from the store:
 ```bash
 mkdir $HOME/workflows
 cd $HOME/workflows
+export OPENFAAS_URL=http://127.0.0.1:31112
 faas-cli store deploy SentimentAnalysis
 ```
 
-The Sentiment Analysis function will tell you the subjectivity and polarity (positivity rating) of any sentence. The result of the function is formatted in JSON as per the example below:
+The Sentiment Analysis function will tell you the subjectivity and polarity (positivity rating) of any sentence. The result of the function is formatted in JSON as you can see with the example below:
 
 ```bash
-$ echo -n "California is great, it's always sunny there." | faas-cli invoke sentimentanalysis
-{"polarity": 0.8, "sentence_count": 1, "subjectivity": 0.75}
+echo -n "California is great, it's always sunny there." | faas-cli invoke sentimentanalysis
+```
+
+```json
+# Formatted result
+{
+  "polarity": 0.8,
+  "sentence_count": 1,
+  "subjectivity": 0.75
+}
 ```
 
 Now let's create a new simple function (like in the previous exercise) that will call `sentimentanalysis` just forwarding the request text.
@@ -25,7 +33,7 @@ Now let's create a new simple function (like in the previous exercise) that will
 faas-cli new --lang python3 invoker --prefix="<your-docker-username-here>"
 ```
 
-The `handler.py` code should look like:
+The `handler.py` code should look like this:
 
 ```python
 import os
@@ -38,11 +46,11 @@ def handle(req):
         req (str): request body
     """
 
-    gateway_hostname = os.getenv("gateway_hostname", "gateway") # uses a default of "gateway" for when "gateway_hostname" is not set
+    gateway_hostname = os.getenv("gateway_hostname", "gateway")
 
     test_sentence = req
 
-    r = requests.get("http://" + gateway_hostname + ":31112/function/sentimentanalysis", data= test_sentence)
+    r = requests.get("http://" + gateway_hostname + ":8080/function/sentimentanalysis", data=test_sentence)
 
     if r.status_code != 200:
         sys.exit("Error with sentimentanalysis, expected: %d, got: %d\n" % (200, r.status_code))
@@ -54,19 +62,37 @@ def handle(req):
         return "That was neutral or negative"
 ```
 
-Put `requests` in requirements.txt:
+Put `requests` in requirements.txt file:
 
 ```text
-requests
+echo "requests" >> invoker/requirements.txt
 ```
 
-Then just deploy our function:
+Remember to set the environment variable `gateway_hostname` in `invoker.yml`:
+
+```yaml
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:31112
+functions:
+  invoker:
+    lang: python3
+    handler: ./invoker
+    image: mircot/invoker:latest
+    environment:
+      gateway_hostname=gateway.openfaas
+```
+
+Then, just deploy our function:
 
 ```bash
 faas-cli up -f invoker.yml
 ```
 
-You can now try to invoke the new function, verifying that the request has been forwarded to `sentimentanalysis` by your custom function. We have just created a basic workflow.
+You can now try to invoke the new function.
+You can verify that the request has been forwarded to `sentimentanalysis` by your custom function. 
+We have just created a basic workflow.
 
 ```bash
 $ echo -n "California is bad, it's always rainy there." | faas-cli invoke invoker
@@ -93,22 +119,83 @@ mc admin service restart local
 
 The request sent to the function by Minio in case of a file upload will have a body in this form:
 
-```text
-{"EventName":"s3:ObjectCreated:Put","Key":"images/test7.jpg","Records":[{"eventVersion":"2.0","eventSource":"minio:s3","awsRegion":"","eventTime":"2019-09-10T14:27:46Z","eventName":"s3:ObjectCreated:Put","userIdentity":{"principalId":"dciangot"},"requestParameters":{"accessKey":"dciangot","region":"","sourceIPAddress":"192.168.0.213"},"responseElements":{"content-length":"0","x-amz-request-id":"15C319FC231726B5","x-minio-deployment-id":"f6a78fdc-8d8e-4d2c-8aca-4b0bd4082129","x-minio-origin-endpoint":"http://192.168.0.213:9000"},"s3":{"s3SchemaVersion":"1.0","configurationId":"Config","bucket":{"name":"images","ownerIdentity":{"principalId":"dciangot"},"arn":"arn:aws:s3:::images"},"object":{"key":"test7.jpg","size":1767621,"eTag":"1f9ae70259a36b5c1b5692f91386bb75-1","contentType":"image/jpeg","userMetadata":{"content-type":"image/jpeg"},"versionId":"1","sequencer":"15C319FC2679B7CB"}},"source":{"host":"192.168.0.213","port":"","userAgent":"MinIO (linux; amd64) minio-go/v6.0.32 mc/2019-09-05T23:43:50Z"}}]}
+```json
+{
+  "EventName": "s3:ObjectCreated:Put",
+  "Key": "images/test7.jpg",
+  "Records": [
+    {
+      "eventVersion": "2.0",
+      "eventSource": "minio:s3",
+      "awsRegion": "",
+      "eventTime": "2019-09-10T14:27:46Z",
+      "eventName": "s3:ObjectCreated:Put",
+      "userIdentity": {
+        "principalId": "usernameID"
+      },
+      "requestParameters": {
+        "accessKey": "myaccesskey",
+        "region": "",
+        "sourceIPAddress": "192.168.0.213"
+      },
+      "responseElements": {
+        "content-length": "0",
+        "x-amz-request-id": "15C319FC231726B5",
+        "x-minio-deployment-id": "f6a78fdc-8d8e-4d2c-8aca-4b0bd4082129",
+        "x-minio-origin-endpoint": "http://192.168.0.213:9000"
+      },
+      "s3": {
+        "s3SchemaVersion": "1.0",
+        "configurationId": "Config",
+        "bucket": {
+          "name": "images",
+          "ownerIdentity": {
+            "principalId": "usernameID"
+          },
+          "arn": "arn:aws:s3:::images"
+        },
+        "object": {
+          "key": "test7.jpg",
+          "size": 1767621,
+          "eTag": "1f9ae70259a36b5c1b5692f91386bb75-1",
+          "contentType": "image/jpeg",
+          "userMetadata": {
+            "content-type": "image/jpeg"
+          },
+          "versionId": "1",
+          "sequencer": "15C319FC2679B7CB"
+        }
+      },
+      "source": {
+        "host": "192.168.0.213",
+        "port": "",
+        "userAgent": "MinIO (linux; amd64) minio-go/v6.0.32 mc/2019-09-05T23:43:50Z"
+      }
+    }
+  ]
+}
 ```
 
-Now create two buckets called `incoming` and `processed`
+Now create two buckets called `incoming` and `processed`:
 
 ```bash
 mc mb local/incoming
 mc mb local/processed
+```
 
-# Set the trigger for any new jpg file appearing in local/incoming
+Set the trigger for any new jpg file appearing in local/incoming:
+
+```bash
 mc event add local/incoming arn:minio:sqs::1:webhook --event put --suffix .jpg
 ```
 
-You can log into the WebUI at `http://localhost:9000` with username `admin` and password `adminminio`.
+You can log into the WebUI at <a href="http://localhost:9000/ui/" target="_blank">http://localhost:9000/ui/</a> with username `admin` and password `adminminio`.
+
+![Minio login](img/minio_0.png)
+
 From there you can upload files and check the contents of the buckets.
+
+![Minio login](img/minio_1.png)
 
 
 ### Trigger a facedetect function on loaded images
@@ -119,17 +206,18 @@ First of all create a new function:
 mkdir $HOME/triggers
 cd $HOME/triggers
 
-faas-cli new --lang python3 processimages --prefix="<your-docker-username-here>"
+faas-cli new --lang python3 processimage --prefix="<your-docker-username-here>"
 ```
 
 Then we need to modify the handler to:
-- get the file name from the storage event
-- get the file from the storage
-- encode it in base64 (required as input by the face detection function)
-- call the face detection function
-- get the output and save it back to the storage in a separate bucket
 
-The result is in this form:
+1. get the file name from the storage event
+2. get the file from the storage
+3. encode it in base64 (required as input by the face detection function)
+4. call the face detection function
+5. get the output and save it back to the storage in a separate bucket
+
+A possible result could be:
 
 ```python
 import json
@@ -139,18 +227,16 @@ import os
 import base64
 
 def handle(st):
-    
     """handle a request to the function
     Args:
         st (str): request body
     """
 
     # Decode the json from the Minio event
-    print(st)
     req = json.loads(st)
 
     # Get configuration parameters from the docker environment (set in the processimage.yml)
-    gateway = gateway_hostname = os.getenv("openfaas_gw", "gateway.openfaas")
+    gateway = os.getenv("openfaas_gw", "gateway.openfaas")
 
     # Configure the storage client
     mc = Minio(os.environ['minio_hostname'],
@@ -175,11 +261,10 @@ def handle(st):
     # Pass it to the facedetect function
     r = requests.post(gateway + "/function/facedetect", input_image)
     if r.status_code != 200:
-        print("Error during call to facedetect, expected: %d, got: %d\n" % (200, r.status_code))
-        return st
+        return "Error during call to facedetect, expected: %d, got: %d\n" % (200, r.status_code)
 
     # Finally get the output and save it locally
-    dest_file_name = "processed" + file_name
+    dest_file_name = f"processed_{filename}"
     f = open("/tmp/" + dest_file_name, "wb")
     f.write(r.content)
     f.close()
@@ -191,7 +276,7 @@ def handle(st):
     # sync to Minio
     mc.fput_object(dest_bucket, dest_file_name, "/tmp/"+dest_file_name)
 
-    return st
+    return f"Image {file_name} processed. Result is in {dest_bucket}"
 ```
 
 Now you need to configure the deployment of the functions:
@@ -203,10 +288,10 @@ provider:
   gateway: http://127.0.0.1:31112
 functions:
   # function for loading the image from storage - the code just edited
-  processimages:
+  processimage:
     lang: python3
-    handler: ./processimages
-    image: <your-docker-username-here>/processimages:latest
+    handler: ./processimage
+    image: <your-docker-username-here>/processimage:latest
     environment:
       write_debug: true
       # environment variables used inside the funcion code
@@ -235,12 +320,20 @@ requests
 Then just build and deploy our two functions with:
 
 ```bash
-faas-cli build -f processimages.yml
-faas-cli push -f processimages.yml
-faas-cli deploy -f processimages.yml
+faas-cli build -f processimage.yml
+faas-cli push -f processimage.yml
+faas-cli deploy -f processimage.yml
 ```
 
-Now, once the functions will be ready you should try to upload a jpg image to the `incoming` bucket using the WebUI ( login at `<your host>:9000` with user `admin` and passwd `adminminio` ) and soon you should be able to find a processed file in the `processed` bucket that you can download from the webUI and visualize.
+Now, once the functions will be ready you should try to upload a `.jpg` image to the `incoming` bucket using the WebUI ( login at `<your host>:9000` with user `admin` and passwd `adminminio` ) and soon you should be able to find a processed file in the `processed` bucket that you can download from the webUI and visualize.
+
+In the following image you can see an example of the hook result:
+
+![Minio file upload](img/minio_2.png)
+
+---
+
+![Minio file processed](img/minio_3.png)
 
 
 ## HOMEWORKS
