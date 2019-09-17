@@ -19,5 +19,6 @@ Part of the FaaS introductory material is provided by [OpenFaaS workshop](https:
 
 ## EXTRAS: machine setup and architecture
 
+- [Ansible deployment of a webserver](ansible.md)
 - [Container Orchestration with Kubernetes](k3s.md)
 - [Setting up FaaS platform](openfaas.md)

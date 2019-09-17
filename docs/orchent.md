@@ -7,8 +7,6 @@ When working with cloud resources, depending on the user needs, different layers
 
 [![PaaS](img/platform-spectrum-small.png)](https://dodas-ts.github.io/SOSC-2019/img/platform-spectrum-small.png)
 
-This part of the hands-on will focus on PaaS, for other "as a Service", take a look at this interesting post [here](https://mesosphere.com/blog/iaas-vs-caas-vs-paas-vs-faas/) from which, for this page, pictures and description credits are.
-
 
 ## Platform as a Service on top of Infrastracture as a Service
 
@@ -34,61 +32,60 @@ Key features:
 - Use of resources can be scaled depending on service needs.
 - Applications are accessible from almost any internet-connected device, from virtually anywhere in the world.
 
-__In this hands-on a webserver will be deployed on cloud resources in an automated way thanks the use of a PaaS orchestrator and TOSCA system description files.__
+__N.B. In this hands-on a simple VM will be deployed, as an example, on cloud resources in an automated way thanks the use of a PaaS orchestrator and TOSCA system description files. More complicated recipices can provide you with a working k8s cluster where you can setup a FaaS framework as you will use in the next chapters.__
 
 
 ## INDIGO-DC PaaS orchestrator
 
-[![tosca](img/sosc-indigo.png)](https://dodas-ts.github.io/SOSC-2019/img/sosc-indigo.png)
+[![tosca](img/sosc-indigo.png)](https://dodas-ts.github.io/SOSC2019/img/sosc-indigo.png)
 
 [The INDIGO PaaS Orchestrator](https://github.com/indigo-dc/orchestrator) allows to instantiate resources on Cloud Management Frameworks (like OpenStack and OpenNebula) platforms based on deployment requests that are expressed through templates written in [TOSCA YAML Simple Profile v1.0](https://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.0/csprd01/TOSCA-Simple-Profile-YAML-v1.0-csprd01.html), and deploys them on the best cloud site available.
 
+### Requirement
+
+- First of you need to register to the service as described [here](https://dodas-iam.cloud.cnaf.infn.it). *N.B.* please put in the registration note "SOSC2019 student". Requests without this note will not be accepted. Please also notice that the resources instantiated for the school will be removed from the test pool few days after the end of the school.
+- `golang` installation is also needed [here](https://golang.org/doc/install)
+```bash
+# For the school machine, just do:
+wget https://dl.google.com/go/go1.13.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.13.linux-amd64.tar.gz
+export PATH=$PATH:/usr/local/go/bin:/home/ubuntu/go/bin
+```
 
 ### Install orchent client
 
 The requirement here is `golang` installation that can you find [here](https://golang.org/doc/install)
 
 ```bash
-wget https://dl.google.com/go/go1.13.linux-amd64.tar.gz
-sudo tar -C /usr/local -xzf go1.13.linux-amd64.tar.gz
-export PATH=$PATH:/usr/local/go/bin:/home/ubuntu/go/bin
 go get github.com/indigo-dc/orchent
 go install github.com/indigo-dc/orchent
+wget https://github.com/Cloud-PG/dodas-go-client/releases/download/v0.2.2/dodas.zip
+unzip dodas.zip
+sudo mv dodas /usr/local/bin/
+sudo apt install -y jq unzip
 ```
 
 
 ### Retrieve IAM token
 
 ``` bash
-./scripts/get_orchent_token.sh
+git clone https://github.com/Cloud-PG/SOSC2019.git
+cd SOSC2019
+source ./scripts/get_orchent_token.sh
 ```
 
 You'll be prompted with username and password requests. Just insert the one corresponding to you Indigo-IAM account.
 
-The output of the command should be something like
-
-``` text
-Orchent access token has to be set with the following:
- export ORCHENT_TOKEN="eyJraWQiOiJyc......."
-```
-
-Copy and paste the export command to source the correct environement along with this:
-
-``` bash
-export ORCHENT_URL=https://orchestrator.cloud.cnaf.infn.it/orchestrator
-```
-
-
 ### Using TOSCA
 
-[![tosca](img/tosca.png)](https://dodas-ts.github.io/SOSC-2019/img/tosca.png)
+[![tosca](img/tosca.png)](https://dodas-ts.github.io/SOSC2019/img/tosca.png)
 
 The TOSCA metamodel uses the concept of __service templates to describe cloud workloads as a topology template__, which is a graph of node templates modeling the components a workload is made up of and as relationship templates modeling the relations between those components. TOSCA further provides a type __system of node types to describe the possible building blocks for constructing a service template__, as well as relationship type to describe possible kinds of relations. Both node and relationship types may define lifecycle operations to implement the behavior an orchestration engine can invoke when instantiating a service template. For example, a node type for some software product might provide a ‘create’ operation to handle the creation of an instance of a component at runtime, or a ‘start’ or ‘stop’ operation to handle a start or stop event triggered by an orchestration engine. Those lifecycle operations are backed by implementation artifacts such as scripts or Chef recipes that implement the actual behavior.
 
 The TOSCA simple profile assumes a number of base types (node types and relationship types) to be supported by each compliant environment such as a ‘Compute’ node type, a ‘Network’ node type or a generic ‘Database’ node type. Furthermore, it is envisioned that a large number of __additional types for use in service templates will be defined by a community over time__. Therefore, template authors in many cases will not have to define types themselves but can __simply start writing service templates that use existing types__. In addition, the simple profile will provide means for easily customizing and extending existing types, for example by providing a customized ‘create’ script for some software.
 
 
-### Deploy webserver on the cloud: TOSCA types
+### Deploy a simple VM on the cloud: TOSCA types
 
 Tosca types are the building blocks needed to indicate the correct procedure for the vm creation and software deployment.
 
@@ -289,11 +286,7 @@ topology_template:
         endpoint:
           properties:
             network_name: PUBLIC
-            dns_name: apachepublic
-            ports:
-              apache_port:
-                protocol: tcp
-                source: 4880
+            dns_name: serverpublic
         scalable:
           properties:
             count: 1 
@@ -305,11 +298,6 @@ topology_template:
           properties:
             image: "ost://cloud.recas.ba.infn.it/1113d7e8-fc5d-43b9-8d26-61906d89d479"
 
-    apache_install:
-      type: tosca.nodes.WebServer.Apache
-      requirements:
-        - host: create-server-vm
-
   outputs:
     vm_ip:
       value: { concat: [ get_attribute: [ create-server-vm, public_address, 0 ] ] }
@@ -317,7 +305,17 @@ topology_template:
       value: { get_attribute: [ create-server-vm, endpoint, credential, 0 ] }
 ```
 
-To start the deployment:
+Before starting with the deployment let's validate our template:
+
+```bash
+dodas validate --template templates/hands-on-1/Handson-Part1.yaml
+```
+
+Then start the deployment on provided cloud resources with:
+
+```bash
+dodas create --config auth_file.yaml templates/hands-on-1/Handson-Part1.yaml
+```
 
 ``` bash
 orchent depcreate  templates/hands-on-1/Handson-Part1.yaml '{}'
@@ -326,67 +324,52 @@ orchent depcreate  templates/hands-on-1/Handson-Part1.yaml '{}'
 the expected output is something like:
 
 ``` text
-retrieving deployment list:
-  page: 0/1 [ #Elements: 1, size: 10 ]
-  links:
-    self [https://orchestrator.cloud.cnaf.infn.it/orchestrator/deployments?createdBy=me]
-
-
-Deployment [28dc62e6-facc-4f70-bc14-4a32e1149c94]:
-  status: CREATE_IN_PROGRESS
-  creation time: 2019-09-05T12:47+0000
-  update time: 2019-09-05T12:47+0000
-  callback:
+Using config file: auth_file.yaml
+validate called
+Template OK
+Template: templates/hands-on-1/Handson-Part1.yaml 
+Submitting request to  :  https://im-dodas.cloud.cnaf.infn.it/infrastructures
+InfrastructureID:  69a25fce-d947-11e9-b18c-0242ac120003
 ```
 
+Note down you InfrastructureID.
 
 ### Monitor the deployment process
 
-``` bash
-orchent depls --created_by=me
+Check the status of the deployment time to time with:
+
+```bash
+dodas --config auth_file.yaml get status <InfrastructureID>
 ```
 
-get your deployment ID then check for:
+When completed just check how many VMs are available
 
-``` bash
-orchent depshow <deployment ID>
+```bash
+$ dodas --config auth_file.yaml list vms <InfrastructureID>
+Using config file: auth_file.yaml
+vms called
+Submitting request to  :  https://im-dodas.cloud.cnaf.infn.it/infrastructures
+Available Infrastructure VMs:
+ https://im-dodas.cloud.cnaf.infn.it/infrastructures/69a25fce-d947-11e9-b18c-0242ac120003/vms/0
 ```
 
-when the deployment is completed, the output should look like: 
+Now you can retrieve the vm0 details and save the private key in a file (e.g. vm0-key) :
 
-``` text
-Deployment [28dc62e6-facc-4f70-bc14-4a32e1149c94]:
-  status: CREATE_COMPLETE
-  creation time: 2019-09-05T12:47+0000
-  update time: 2019-09-05T13:01+0000
-  callback:
-  status reason:
-  task: NONE
-  CloudProviderName: provider-BARI
-  outputs:
-  {
-      "vm_ip": "90.147.75.108",
-      "cluster_credentials": {
-          "token": "-----BEGIN RSA PRIVATE KEY-----dasdgdsg............\n-----END RSA PRIVATE KEY-----\n"
-      }
-  }
-  links:
-    self [https://orchestrator.cloud.cnaf.infn.it/orchestrator/deployments/28dc62e6-facc-4f70-bc14-4a32e1149c94]
-    resources [https://orchestrator.cloud.cnaf.infn.it/orchestrator/deployments/28dc62e6-facc-4f70-bc14-4a32e1149c94/resources]
-    template [https://orchestrator.cloud.cnaf.infn.it/orchestrator/deployments/28dc62e6-facc-4f70-bc14-4a32e1149c94/template]
+```bash
+dodas --config auth_file.yaml get vm <InfrastructureID> 0
+
+# now write down the private key provided into vm0-key file then
+chmod 600 vm0-key
 ```
 
+Now you should be able to log into the machine with:
 
-### Login into the deployed machine
-
-``` bash
-echo -e "-----BEGIN RSA PRIVATE KEY-----\n................\n-----END RSA PRIVATE KEY-----\n" > key.key
-chmod 600 key.key
-ssh -i key.key <vm_ip> -l cloudadm
+```bash
+ssh -i vm0-key <public address provided above>
 ```
 
 
 ## HOMEWORKS
 
-- TBD
-
+- Create an automatic deployment of a webserver with [Ansible](ansible.md) 
+- Just to get an idea, try to take a look at the TOSCA file for the deployment of kubernetes cluster that uses INDIGO-DC PaaS Orchestrator and Ansible recipes [here](https://github.com/indigo-dc/tosca-templates/blob/k8s_cms/dodas/Kubernetes.yaml)

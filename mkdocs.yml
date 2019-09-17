@@ -12,6 +12,7 @@ nav:
 - Functions 101: 'events.md'
 - Workflows and triggers: 'workflows.md'
 - Extras:
+  - Ansible deployment of a webserver: 'ansible.md'
   - Setup a Container Orchestration: 'k3s.md'
   - Setup FaaS platform: 'openfaas.md'
 repo_url: 'https://github.com/Cloud-PG/SOSC2019'
