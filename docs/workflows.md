@@ -81,7 +81,7 @@ functions:
     handler: ./invoker
     image: mircot/invoker:latest
     environment:
-      gateway_hostname: gateway.openfaas
+      gateway_hostname: "gateway.openfaas"
 ```
 
 Then, just deploy our function:
