@@ -1,0 +1,762 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+    
+    
+      
+        <title>PaaS Orchestration - SOSC2019</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.30686662.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="red">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#_1" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href=".." title="SOSC2019" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">cloud_circle</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              SOSC2019
+            </span>
+            <span class="md-header-nav__topic">
+              
+                PaaS Orchestration
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/Cloud-PG/SOSC2019/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href=".." title="SOSC2019" class="md-nav__button md-logo">
+      
+        <i class="md-icon">cloud_circle</i>
+      
+    </a>
+    SOSC2019
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/Cloud-PG/SOSC2019/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" title="PaaS Orchestration" class="md-nav__link md-nav__link--active">
+      PaaS Orchestration
+    </a>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../events/" title="Functions 101" class="md-nav__link">
+      Functions 101
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../workflows/" title="Workflows and triggers" class="md-nav__link">
+      Workflows and triggers
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Extras
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Extras
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ansible/" title="Ansible deployment of a webserver" class="md-nav__link">
+      Ansible deployment of a webserver
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../k3s/" title="Setup a Container Orchestration" class="md-nav__link">
+      Setup a Container Orchestration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../openfaas/" title="Setup FaaS platform" class="md-nav__link">
+      Setup FaaS platform
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/Cloud-PG/SOSC2019/edit/master/docs/orchent.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h3 id="_1"><a href="..">◀</a></h3>
+<h1 id="introduction-to-cloud-platforms">Introduction to cloud platforms</h1>
+<p>When working with cloud resources, depending on the user needs, different layers of underlyng abstraction can be needed, and depending on how many layers and their composition one can define different categories.</p>
+<p><a href="../img/platform-spectrum-small.png"><img alt="PaaS" src="../img/platform-spectrum-small.png" /></a></p>
+<h2 id="platform-as-a-service-on-top-of-infrastracture-as-a-service">Platform as a Service on top of Infrastracture as a Service</h2>
+<p><a href="../img/PaaS-IaaS.png"><img alt="PaaS" src="../img/PaaS-IaaS.png" /></a></p>
+<p>Infrastructure as a service (IaaS)  is <strong>a cloud computing offering in which a vendor provides users access to computing resources such as servers</strong>, storage and networking. Organizations use their own platforms and applications within a service provider’s infrastructure.</p>
+<p>Key features:</p>
+<ul>
+<li>Instead of purchasing hardware outright, users pay for IaaS on demand.</li>
+<li>Infrastructure is scalable depending on processing and storage needs.</li>
+<li>Saves enterprises the costs of buying and maintaining their own hardware.</li>
+<li>Because data is on the cloud, there can be no single point of failure.</li>
+<li>Enables the virtualization of administrative tasks, freeing up time for other work.</li>
+</ul>
+<p>Platform as a service (PaaS) is <strong>a cloud computing offering that provides users with a cloud environment in which they can develop, manage and deliver applications.</strong> In addition to storage and other computing resources, users are able to use a suite of prebuilt tools to develop, customize and test their own applications.</p>
+<p>Key features:</p>
+<ul>
+<li>SaaS vendors provide users with software and applications via a subscription model.</li>
+<li>Users do not have to manage, install or upgrade software; SaaS providers manage this.</li>
+<li>Data is secure in the cloud; equipment failure does not result in loss of data.</li>
+<li>Use of resources can be scaled depending on service needs.</li>
+<li>Applications are accessible from almost any internet-connected device, from virtually anywhere in the world.</li>
+</ul>
+<p><strong>N.B. In this hands-on a simple VM will be deployed, as an example, on cloud resources in an automated way thanks the use of a PaaS orchestrator and TOSCA system description files. More complicated recipices can provide you with a working k8s cluster where you can setup a FaaS framework as you will use in the next chapters.</strong></p>
+<h2 id="indigo-dc-paas-orchestrator">INDIGO-DC PaaS orchestrator</h2>
+<p><a href="../img/sosc-indigo.png"><img alt="tosca" src="../img/sosc-indigo.png" /></a></p>
+<p><a href="https://github.com/indigo-dc/orchestrator">The INDIGO PaaS Orchestrator</a> allows to instantiate resources on Cloud Management Frameworks (like OpenStack and OpenNebula) platforms based on deployment requests that are expressed through templates written in <a href="https://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.0/csprd01/TOSCA-Simple-Profile-YAML-v1.0-csprd01.html">TOSCA YAML Simple Profile v1.0</a>, and deploys them on the best cloud site available.</p>
+<h3 id="requirement">Requirement</h3>
+<ul>
+<li>First of you need to register to the service as described <a href="https://dodas-iam.cloud.cnaf.infn.it">here</a>. <em>N.B.</em> please put in the registration note "SOSC2019 student". Requests without this note will not be accepted. Please also notice that the resources instantiated for the school will be removed from the test pool few days after the end of the school.</li>
+</ul>
+<h3 id="install-deployment-client">Install deployment client</h3>
+<div class="codehilite"><pre><span></span>sudo apt install -y jq unzip
+wget https://github.com/Cloud-PG/dodas-go-client/releases/download/v0.2.2/dodas.zip
+unzip dodas.zip
+sudo mv dodas /usr/local/bin/
+</pre></div>
+
+
+<h3 id="retrieve-iam-token">Retrieve IAM token</h3>
+<div class="codehilite"><pre><span></span>git clone https://github.com/Cloud-PG/SOSC2019.git
+<span class="nb">cd</span> SOSC2019
+<span class="nb">source</span> ./scripts/get_orchent_token.sh
+</pre></div>
+
+
+<p>You'll be prompted with username and password requests. Just insert the one corresponding to you Indigo-IAM account.</p>
+<h3 id="using-tosca">Using TOSCA</h3>
+<p><a href="../img/tosca.png"><img alt="tosca" src="../img/tosca.png" /></a></p>
+<p>The TOSCA metamodel uses the concept of <strong>service templates to describe cloud workloads as a topology template</strong>, which is a graph of node templates modeling the components a workload is made up of and as relationship templates modeling the relations between those components. TOSCA further provides a type <strong>system of node types to describe the possible building blocks for constructing a service template</strong>, as well as relationship type to describe possible kinds of relations. Both node and relationship types may define lifecycle operations to implement the behavior an orchestration engine can invoke when instantiating a service template. For example, a node type for some software product might provide a ‘create’ operation to handle the creation of an instance of a component at runtime, or a ‘start’ or ‘stop’ operation to handle a start or stop event triggered by an orchestration engine. Those lifecycle operations are backed by implementation artifacts such as scripts or Chef recipes that implement the actual behavior.</p>
+<p>The TOSCA simple profile assumes a number of base types (node types and relationship types) to be supported by each compliant environment such as a ‘Compute’ node type, a ‘Network’ node type or a generic ‘Database’ node type. Furthermore, it is envisioned that a large number of <strong>additional types for use in service templates will be defined by a community over time</strong>. Therefore, template authors in many cases will not have to define types themselves but can <strong>simply start writing service templates that use existing types</strong>. In addition, the simple profile will provide means for easily customizing and extending existing types, for example by providing a customized ‘create’ script for some software.</p>
+<h3 id="deploy-a-simple-vm-on-the-cloud-tosca-types">Deploy a simple VM on the cloud: TOSCA types</h3>
+<p>Tosca types are the building blocks needed to indicate the correct procedure for the vm creation and software deployment.</p>
+<p>During this hands on the following types are used:</p>
+<div class="codehilite"><pre><span></span><span class="nt">tosca_definitions_version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca_simple_yaml_1_0</span>
+
+<span class="nt">capability_types</span><span class="p">:</span>
+
+  <span class="nt">tosca.capabilities.indigo.OperatingSystem</span><span class="p">:</span>
+    <span class="nt">derived_from</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.capabilities.OperatingSystem</span>
+    <span class="nt">properties</span><span class="p">:</span>
+      <span class="nt">gpu_driver</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">boolean</span>
+        <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
+      <span class="nt">cuda_support</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">boolean</span>
+        <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
+      <span class="nt">cuda_min_version</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+        <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
+      <span class="nt">image</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+        <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
+      <span class="nt">credential</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.datatypes.Credential</span>
+        <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
+
+  <span class="nt">tosca.capabilities.indigo.Scalable</span><span class="p">:</span>
+    <span class="nt">derived_from</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.capabilities.Scalable</span>
+    <span class="nt">properties</span><span class="p">:</span>
+      <span class="nt">min_instances</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">integer</span>
+        <span class="nt">default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+        <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
+      <span class="nt">max_instances</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">integer</span>
+        <span class="nt">default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+        <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
+      <span class="nt">count</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">integer</span>
+        <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">the number of resources</span>
+        <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
+        <span class="nt">default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+      <span class="nt">removal_list</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">list</span>
+        <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">list of IDs of the resources to be removed</span>
+        <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
+        <span class="nt">entry_schema</span><span class="p">:</span>
+          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+
+  <span class="nt">tosca.capabilities.indigo.Container</span><span class="p">:</span>
+    <span class="nt">derived_from</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.capabilities.Container</span>
+    <span class="nt">properties</span><span class="p">:</span>
+      <span class="nt">instance_type</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+        <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
+      <span class="nt">num_gpus</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">integer</span>
+        <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+      <span class="nt">gpu_vendor</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+        <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+      <span class="nt">gpu_model</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+        <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>  
+
+
+  <span class="nt">tosca.capabilities.indigo.Endpoint</span><span class="p">:</span>
+    <span class="nt">derived_from</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.capabilities.Endpoint</span>
+    <span class="nt">properties</span><span class="p">:</span>
+      <span class="nt">dns_name</span><span class="p">:</span>
+        <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">The optional name to register with DNS</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+        <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+      <span class="nt">private_ip</span><span class="p">:</span>
+        <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Flag used to specify that this endpoint will require also a private IP although it is a public one.</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">boolean</span>
+        <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+        <span class="nt">default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">attributes</span><span class="p">:</span>
+      <span class="nt">credential</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">list</span>
+        <span class="nt">entry_schema</span><span class="p">:</span>
+          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.datatypes.Credential</span>
+
+
+<span class="nt">artifact_types</span><span class="p">:</span>
+
+  <span class="nt">tosca.artifacts.Implementation.YAML</span><span class="p">:</span>
+    <span class="nt">derived_from</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.artifacts.Implementation</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">YAML Ansible recipe artifact</span>
+    <span class="nt">mime_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">text/yaml</span>
+    <span class="nt">file_ext</span><span class="p">:</span> <span class="p p-Indicator">[</span> <span class="nv">yaml</span><span class="p p-Indicator">,</span> <span class="nv">yml</span> <span class="p p-Indicator">]</span>
+
+  <span class="nt">tosca.artifacts.AnsibleGalaxy.role</span><span class="p">:</span>
+    <span class="nt">derived_from</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.artifacts.Root</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ansible Galaxy role to be deployed in the target node</span>
+
+<span class="nt">relationship_types</span><span class="p">:</span>
+
+  <span class="nt">tosca.relationships.indigo.Manages</span><span class="p">:</span>
+    <span class="nt">derived_from</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.relationships.Root</span>
+
+<span class="nt">node_types</span><span class="p">:</span>
+
+  <span class="nt">tosca.nodes.WebServer.Apache</span><span class="p">:</span>
+    <span class="nt">derived_from</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.nodes.WebServer</span>
+    <span class="nt">interfaces</span><span class="p">:</span>
+      <span class="nt">Standard</span><span class="p">:</span>
+        <span class="nt">create</span><span class="p">:</span>
+          <span class="nt">implementation</span><span class="p">:</span>  <span class="l l-Scalar l-Scalar-Plain">https://raw.githubusercontent.com/DODAS-TS/SOSC-2019/master/templates/hands-on-1/ansible-role-install.yml</span>
+        <span class="nt">start</span><span class="p">:</span>
+          <span class="nt">implementation</span><span class="p">:</span>  <span class="l l-Scalar l-Scalar-Plain">https://raw.githubusercontent.com/DODAS-TS/SOSC-2019/master/templates/hands-on-1/ansible-role-apache.yml</span>
+
+  <span class="nt">tosca.nodes.indigo.Compute</span><span class="p">:</span>
+    <span class="nt">derived_from</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.nodes.indigo.MonitoredCompute</span>
+    <span class="nt">attributes</span><span class="p">:</span>
+      <span class="nt">private_address</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">list</span>
+        <span class="nt">entry_schema</span><span class="p">:</span>
+          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+      <span class="nt">public_address</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">list</span>
+        <span class="nt">entry_schema</span><span class="p">:</span>
+          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+      <span class="nt">ctxt_log</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+    <span class="nt">capabilities</span><span class="p">:</span>
+      <span class="nt">scalable</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.capabilities.indigo.Scalable</span>
+      <span class="nt">os</span><span class="p">:</span>
+         <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.capabilities.indigo.OperatingSystem</span>
+      <span class="nt">endpoint</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.capabilities.indigo.Endpoint</span>
+      <span class="nt">host</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.capabilities.indigo.Container</span>
+        <span class="nt">valid_source_types</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">tosca.nodes.SoftwareComponent</span><span class="p p-Indicator">]</span>
+
+  <span class="nt">tosca.nodes.indigo.MonitoredCompute</span><span class="p">:</span>
+    <span class="nt">derived_from</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.nodes.Compute</span>
+    <span class="nt">properties</span><span class="p">:</span>
+      <span class="c1"># Set the current data of the zabbix server</span>
+      <span class="c1"># but it can also specified in the TOSCA document</span>
+      <span class="nt">zabbix_server</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+        <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
+        <span class="nt">default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">orchestrator.cloud.cnaf.infn.it</span>
+      <span class="nt">zabbix_server_port</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.datatypes.network.PortDef</span>
+        <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
+        <span class="nt">default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10051</span>
+      <span class="nt">zabbix_server_metadata</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+        <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
+        <span class="nt">default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Linux      668c875e-9a39-4dc0-a710-17c41376c1e0</span>
+    <span class="nt">artifacts</span><span class="p">:</span>
+      <span class="nt">zabbix_agent_role</span><span class="p">:</span>
+        <span class="nt">file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">indigo-dc.zabbix-agent</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.artifacts.AnsibleGalaxy.role</span>
+    <span class="nt">interfaces</span><span class="p">:</span>
+      <span class="nt">Standard</span><span class="p">:</span>
+        <span class="nt">configure</span><span class="p">:</span>
+          <span class="nt">implementation</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://raw.githubusercontent.com/indigo-dc/tosca-types/master/artifacts/zabbix/zabbix_agent_install.yml</span>
+          <span class="nt">inputs</span><span class="p">:</span>
+            <span class="nt">zabbix_server</span><span class="p">:</span> <span class="p p-Indicator">{</span><span class="nt"> get_property</span><span class="p">:</span> <span class="p p-Indicator">[</span> <span class="nv">SELF</span><span class="p p-Indicator">,</span> <span class="nv">zabbix_server</span> <span class="p p-Indicator">]</span> <span class="p p-Indicator">}</span>
+            <span class="nt">zabbix_server_port</span><span class="p">:</span> <span class="p p-Indicator">{</span><span class="nt"> get_property</span><span class="p">:</span> <span class="p p-Indicator">[</span> <span class="nv">SELF</span><span class="p p-Indicator">,</span> <span class="nv">zabbix_server_port</span> <span class="p p-Indicator">]</span> <span class="p p-Indicator">}</span>
+            <span class="nt">zabbix_server_metadata</span><span class="p">:</span> <span class="p p-Indicator">{</span><span class="nt"> get_property</span><span class="p">:</span> <span class="p p-Indicator">[</span> <span class="nv">SELF</span><span class="p p-Indicator">,</span> <span class="nv">zabbix_server_metadata</span> <span class="p p-Indicator">]</span> <span class="p p-Indicator">}</span>
+</pre></div>
+
+
+<h3 id="deploy-command-with-deployment-template">Deploy command with deployment template</h3>
+<p>The deployment template makes use of the TOSCA types defined above to create and orchestrate the deployment on the cloud resources.</p>
+<div class="codehilite"><pre><span></span><span class="nt">tosca_definitions_version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca_simple_yaml_1_0</span>
+
+<span class="nt">imports</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">indigo_custom_types</span><span class="p">:</span>  <span class="l l-Scalar l-Scalar-Plain">https://raw.githubusercontent.com/DODAS-TS/SOSC-2019/master/templates/common/types.yml</span>
+
+<span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TOSCA template for a complete CMS Site over Mesos orchestrator</span>
+
+<span class="nt">topology_template</span><span class="p">:</span>
+
+  <span class="nt">inputs</span><span class="p">:</span>
+
+    <span class="nt">input test</span><span class="p">:</span>
+      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span> 
+      <span class="nt">default</span><span class="p">:</span> <span class="s">&quot;test&quot;</span>
+
+  <span class="nt">node_templates</span><span class="p">:</span>
+
+    <span class="nt">create-server-vm</span><span class="p">:</span>
+      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.nodes.indigo.Compute</span>
+      <span class="nt">capabilities</span><span class="p">:</span>
+        <span class="nt">endpoint</span><span class="p">:</span>
+          <span class="nt">properties</span><span class="p">:</span>
+            <span class="nt">network_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">PUBLIC</span>
+            <span class="nt">dns_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">serverpublic</span>
+        <span class="nt">scalable</span><span class="p">:</span>
+          <span class="nt">properties</span><span class="p">:</span>
+            <span class="nt">count</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span> 
+        <span class="nt">host</span><span class="p">:</span>
+          <span class="nt">properties</span><span class="p">:</span>
+            <span class="nt">num_cpus</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+            <span class="nt">mem_size</span><span class="p">:</span> <span class="s">&quot;2</span><span class="nv"> </span><span class="s">GB&quot;</span>
+        <span class="nt">os</span><span class="p">:</span>
+          <span class="nt">properties</span><span class="p">:</span>
+            <span class="nt">image</span><span class="p">:</span> <span class="s">&quot;ost://cloud.recas.ba.infn.it/1113d7e8-fc5d-43b9-8d26-61906d89d479&quot;</span>
+
+  <span class="nt">outputs</span><span class="p">:</span>
+    <span class="nt">vm_ip</span><span class="p">:</span>
+      <span class="nt">value</span><span class="p">:</span> <span class="p p-Indicator">{</span><span class="nt"> concat</span><span class="p">:</span> <span class="p p-Indicator">[</span> <span class="nv">get_attribute</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span> <span class="nv">create-server-vm</span><span class="p p-Indicator">,</span> <span class="nv">public_address</span><span class="p p-Indicator">,</span> <span class="nv">0</span> <span class="p p-Indicator">]</span> <span class="p p-Indicator">]</span> <span class="p p-Indicator">}</span>
+    <span class="nt">cluster_credentials</span><span class="p">:</span>
+      <span class="nt">value</span><span class="p">:</span> <span class="p p-Indicator">{</span><span class="nt"> get_attribute</span><span class="p">:</span> <span class="p p-Indicator">[</span> <span class="nv">create-server-vm</span><span class="p p-Indicator">,</span> <span class="nv">endpoint</span><span class="p p-Indicator">,</span> <span class="nv">credential</span><span class="p p-Indicator">,</span> <span class="nv">0</span> <span class="p p-Indicator">]</span> <span class="p p-Indicator">}</span>
+</pre></div>
+
+
+<p>Before starting with the deployment let's validate our template:</p>
+<div class="codehilite"><pre><span></span>dodas validate --template templates/hands-on-1/Handson-Part1.yaml
+</pre></div>
+
+
+<p>Then start the deployment on provided cloud resources with:</p>
+<div class="codehilite"><pre><span></span>dodas create --config auth_file.yaml templates/hands-on-1/Handson-Part1.yaml
+</pre></div>
+
+
+<p>the expected output is something like:</p>
+<div class="codehilite"><pre><span></span>Using config file: auth_file.yaml
+validate called
+Template OK
+Template: templates/hands-on-1/Handson-Part1.yaml 
+Submitting request to  :  https://im-dodas.cloud.cnaf.infn.it/infrastructures
+InfrastructureID:  69a25fce-d947-11e9-b18c-0242ac120003
+</pre></div>
+
+
+<p>Note down you InfrastructureID.</p>
+<h3 id="monitor-the-deployment-process">Monitor the deployment process</h3>
+<p>Check the status of the deployment time to time with:</p>
+<div class="codehilite"><pre><span></span>dodas --config auth_file.yaml get status &lt;InfrastructureID&gt;
+</pre></div>
+
+
+<p>When completed just check how many VMs are available</p>
+<div class="codehilite"><pre><span></span>$ dodas --config auth_file.yaml list vms &lt;InfrastructureID&gt;
+Using config file: auth_file.yaml
+vms called
+Submitting request to  :  https://im-dodas.cloud.cnaf.infn.it/infrastructures
+Available Infrastructure VMs:
+ https://im-dodas.cloud.cnaf.infn.it/infrastructures/69a25fce-d947-11e9-b18c-0242ac120003/vms/0
+</pre></div>
+
+
+<p>Now you can retrieve the vm0 details and save the private key in a file (e.g. vm0-key) :</p>
+<div class="codehilite"><pre><span></span>dodas --config auth_file.yaml get vm &lt;InfrastructureID&gt; <span class="m">0</span>
+
+<span class="c1"># now write down the private key provided into vm0-key file then</span>
+chmod <span class="m">600</span> vm0-key
+</pre></div>
+
+
+<p>Now you should be able to log into the machine with:</p>
+<div class="codehilite"><pre><span></span>ssh -i vm0-key &lt;public address provided above&gt;
+</pre></div>
+
+
+<h2 id="homeworks">HOMEWORKS</h2>
+<ul>
+<li>Create an automatic deployment of a webserver with <a href="../ansible/">Ansible</a> </li>
+<li>Just to get an idea, try to take a look at the TOSCA file for the deployment of kubernetes cluster that uses INDIGO-DC PaaS Orchestrator and Ansible recipes <a href="https://github.com/indigo-dc/tosca-templates/blob/k8s_cms/dodas/Kubernetes.yaml">here</a></li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href=".." title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Home
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../events/" title="Functions 101" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Functions 101
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.c648116f.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+    
+  </body>
+</html>
