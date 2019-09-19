@@ -264,7 +264,7 @@ def handle(st):
         return "Error during call to facedetect, expected: %d, got: %d\n" % (200, r.status_code)
 
     # Finally get the output and save it locally
-    dest_file_name = f"processed_{filename}"
+    dest_file_name = f"processed_{file_name}"
     f = open("/tmp/" + dest_file_name, "wb")
     f.write(r.content)
     f.close()
